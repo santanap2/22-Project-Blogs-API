@@ -1,3 +1,5 @@
+// iniciando projeto
+
 const express = require('express');
 
 // ...
