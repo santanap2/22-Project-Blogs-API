@@ -12,7 +12,7 @@ const loginRequest = async ({ email, password }) => {
 
   if (!user) return { type: 'INVALID_FIELDS', message: 'Invalid fields' };
 
-  const token = generateToken({ id: user.id, email: user.email, password: user.password });
+  const token = generateToken({ email: user.email, password: user.password });
   return { type: null, message: token };
 };
 
