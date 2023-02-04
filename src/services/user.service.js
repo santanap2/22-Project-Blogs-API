@@ -1,5 +1,5 @@
 const { User } = require('../models');
-const generateToken = require('../jwt/jsonWebToken');
+const { generateToken } = require('../jwt/jsonWebToken');
 const { validateAll } = require('./validations/validateValues');
 
 const createUser = async (newUser) => {
@@ -19,6 +19,12 @@ const createUser = async (newUser) => {
   return { type: 'UNEXPECTED_ERROR', message: 'Some unexpected error ocurred' };
 };
 
+const getUsers = async () => {
+  const result = await User.findAll({ attributes: ['id', 'displayName', 'email', 'image'] });
+  return result;
+};
+
 module.exports = {
   createUser,
+  getUsers,
 };

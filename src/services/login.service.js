@@ -1,5 +1,5 @@
 const { User } = require('../models');
-const generateToken = require('../jwt/jsonWebToken');
+const { generateToken } = require('../jwt/jsonWebToken');
 
 const loginRequest = async ({ email, password }) => {
   const user = await User.findOne({
