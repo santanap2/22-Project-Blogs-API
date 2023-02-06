@@ -3,6 +3,7 @@ const Category = (Sequelize, DataTypes) => {
     id: {
       allowNull: false,
       primaryKey: true,
+      autoIncrement: true,
       type: DataTypes.INTEGER
     },
     name: {
