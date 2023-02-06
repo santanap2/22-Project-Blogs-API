@@ -3,7 +3,7 @@ const PostCategory = (Sequelize, DataTypes) => {
     postId: {
       allowNull: false,
       primaryKey: true,
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
     },
     categoryId: {
       allowNull: false,
