@@ -16,6 +16,10 @@ const createPost = async ({ title, content, categoryIds, authorization }) => {
   const newBlogPost = await BlogPost.create({
     title, content, userId, published: Date.now(), updated: Date.now(),
   });
+
+  await categoryIds.forEach((item) => {
+    PostCategory.create({ postId: newBlogPost.id, categoryId: item });
+  });
      
     return { type: null, message: newBlogPost };
 };
@@ -43,8 +47,26 @@ const getPostById = async (id) => {
   return { type: null, message: result };
 };
 
+// const updatePost = async ({ title, content, id, authorization }) => {
+//   if (!title || !content) {
+//     return { type: 'MISSING_FIELD', message: 'Some required fields are missing' };
+//   }
+
+//   // const { id: tokenId } = authToken(authorization);
+//   // const { id: postId } = await getPostById(id);
+//   // if (postId !== tokenId) return { type: 'NO_ACCESS', message: 'Unauthorized user' };
+
+//   const [result] = await BlogPost.update(
+//     { title, content },
+//     { where: { id } },
+//     );
+
+//   return { type: null, message: result };
+// };
+
 module.exports = {
   createPost,
   getPosts,
   getPostById,
+  // updatePost,
 };

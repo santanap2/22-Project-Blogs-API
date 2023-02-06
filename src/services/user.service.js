@@ -13,7 +13,8 @@ const createUser = async (newUser) => {
 
   const createdUser = await User.create({ displayName, email, password, image });
   if (createdUser) {
-    const token = generateToken({ email, displayName, password });
+    const { id } = await User.findOne({ where: { email, displayName, password } });
+    const token = generateToken({ email, displayName, password, id });
     return { type: null, message: token };
   }
   return { type: 'UNEXPECTED_ERROR', message: 'Some unexpected error ocurred' };

@@ -26,8 +26,22 @@ const getPostById = async (req, res) => {
   return res.status(200).json(message);
 };
 
+const updatePost = async (req, res) => {
+  const { title, content } = req.body;
+  const { authorization } = req.headers;
+  const { id } = req.params;
+
+  const { type, message } = await postService.updatePost({ title, content, id, authorization });
+
+  if (type === 'NO_ACCESS') return res.status(401).json({ message });
+  if (type === 'MISSING_FIELD') return res.status(400).json({ message });
+
+  return res.status(200).json(message);
+};
+
 module.exports = {
   createPost,
   getPosts,
   getPostById,
+  updatePost,
 };
